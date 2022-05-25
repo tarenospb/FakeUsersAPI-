@@ -1,0 +1,17 @@
+version: '3'
+services:
+   sql:
+     image: apisql:fakeusers
+     container_name: sql
+     ports:
+        - 1433:1433
+     
+   rabbitmq:
+     depends_on:
+        - sql
+     container_name: rabbit
+     hostname: rabbitmq
+     image: apirabbit:fakeusers
+     ports:
+        - "5672:5672"
+        - "15672:15672"

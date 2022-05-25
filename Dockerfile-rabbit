@@ -1,0 +1,10 @@
+FROM rabbitmq:3.6.14-management
+
+ENV RABBITMQ_DEFAULT_USER user
+ENV RABBITMQ_PASS user
+ENV RABBITMQ_PID_FILE /var/lib/rabbitmq/mnesia/rabbitmq
+COPY rabbit.sh ./rabbit.sh
+RUN chmod +x /rabbit.sh
+EXPOSE 15672
+RUN rabbitmq-plugins enable rabbitmq_web_stomp 
+CMD ["/rabbit.sh"]
